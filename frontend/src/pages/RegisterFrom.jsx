@@ -20,7 +20,7 @@ const RegisterForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await api.post('/api/user/register', { username, email, password, first_name:firstName, last_name:lastName ,mobile ,address ,pin_code:pincode });
+      const res = await api.post('/api/user/register/', { username, email, password, first_name:firstName, last_name:lastName ,mobile ,address ,pin_code:pincode });
       if(res.status==201){
         navigate("/login");
       }else{

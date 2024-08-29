@@ -7,6 +7,7 @@ function Home() {
   const [notes, setNotes] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [familyDetails,setFamilyDetails] = useState(null)
 
   useEffect(() => {
     getNotes();

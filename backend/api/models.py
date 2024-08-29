@@ -49,6 +49,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     mobile = models.CharField(max_length=50, default=None,null=True)
     address = models.CharField(max_length=250, default=None,null=True)
     pin_code = models.CharField(max_length=6, default=None,null=True)
+    pan_card = models.CharField(max_length=10,default=None,null=True)
+    aadhar_card= models.CharField(max_length= 12,default=None,null=True)
 
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
@@ -72,3 +74,33 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Brother(models.Model):
+    name = models.CharField(max_length=100)
+    family_details = models.ForeignKey('FamilyDetails', related_name='brothers', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+class Sister(models.Model):
+    name = models.CharField(max_length=100)
+    family_details = models.ForeignKey('FamilyDetails', related_name='sisters', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class FamilyDetails(models.Model):
+    total_members = models.IntegerField(null=True, default=None)
+    father_name = models.CharField(max_length=100, null=True,default=None)
+    mother_name = models.CharField(max_length=100,null=True,default=None)
+    grandfather_name = models.CharField(max_length=100,null=True,default=None)
+    grandmother_name = models.CharField(max_length=100,null=True,default=None)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user =  models.OneToOneField('User', on_delete=models.CASCADE, related_name='family_details')
+
+    def __str__(self):
+        return self.user.username
+
+
+
