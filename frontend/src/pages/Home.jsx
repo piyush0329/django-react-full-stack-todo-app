@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import api from "../api";
 import Note from "../components/Note";
 import "../styles/Home.css";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function Home() {
   const [notes, setNotes] = useState([]);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [familyDetails,setFamilyDetails] = useState(null)
+  const [familyDetails, setFamilyDetails] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -54,6 +56,46 @@ function Home() {
         {notes.map((note) => (
           <Note note={note} onDelete={deleteNote} key={note.id} />
         ))}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Button
+          variant="outlined"
+          style={{ height: "100%", padding: "15px" }}
+          type="submit"
+        >
+          <Link style={{ textDecoration: "none" }} to={`/add-family-details/`}>
+            Add Family Details
+          </Link>
+        </Button>
+
+        <Button
+          variant="outlined"
+          style={{ height: "100%", padding: "15px" }}
+          type="submit"
+        >
+          <Link
+            style={{ textDecoration: "none" }}
+            to={"/update-family-details"}
+          >
+            Update Family Details
+          </Link>
+        </Button>
+        <Button
+          variant="outlined"
+          style={{ height: "100%", padding: "15px" }}
+          type="submit"
+          onClick={() => {
+            localStorage.clear();
+            alert('User Logout successfully')
+          }}
+        >
+          Logout
+        </Button>
       </div>
       <h2>Create a Note</h2>
       <form onSubmit={createNote}>

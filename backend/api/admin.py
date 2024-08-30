@@ -32,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('email', 'first_name', 'last_name', 'mobile', 'address', 'pin_code')}),
+        ('Personal info', {'fields': ('email', 'first_name', 'last_name', 'mobile', 'address', 'pin_code','pan_card','aadhar_card')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login',)}),
     )
@@ -43,9 +43,15 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
+class FamilyDetailsAdmin(admin.ModelAdmin):
+    model=FamilyDetails
+    inlines=[BrotherInline,SisterInline]
+
+
+
 
 admin.site.register(Note)
-admin.site.register(FamilyDetails)
+admin.site.register(FamilyDetails,FamilyDetailsAdmin)
 admin.site.register(Brother)
 admin.site.register(Sister)
 admin.site.register(User, UserAdmin)

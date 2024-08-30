@@ -19,11 +19,11 @@ from .models import Note,User,FamilyDetails,Brother,Sister
 
 class UserSerializer(serializers.ModelSerializer):
    
-    first_name = serializers.CharField(required=False, allow_blank=True)
-    last_name = serializers.CharField(required=False, allow_blank=True)
-    pin_code = serializers.CharField(required=False, allow_blank=True)
-    pan_card = serializers.CharField(required=False,allow_blank=True)
-    aadhar_card = serializers.CharField(required=False,allow_blank=True)
+    first_name = serializers.CharField( required=False, allow_blank=True)
+    last_name = serializers.CharField( required=False, allow_blank=True)
+    pin_code = serializers.CharField( required=False, allow_blank=True)
+    pan_card = serializers.CharField( required=False, allow_blank=True)
+    aadhar_card = serializers.CharField( required=False, allow_blank=True)
     
     mobile = serializers.CharField(required=False, allow_blank=True, allow_null=True)
     address = serializers.CharField(required=False, allow_blank=True, allow_null=True)
@@ -114,3 +114,16 @@ class FamilyDetailsSerializer(serializers.ModelSerializer):
         instance.grandfather_name = validated_data.get('grandfather_name', instance.grandfather_name)
         instance.grandmother_name = validated_data.get('grandmother_name', instance.grandmother_name)
         instance.save()
+
+        if brothers_data is not None:
+            instance.brothers.all().delete()  # Delete existing brothers
+        for brother_data in brothers_data:
+            Brother.objects.create(family_details=instance, **brother_data)
+
+        # Handle sisters update
+        if sisters_data is not None:
+            instance.sisters.all().delete()  # Delete existing sisters
+        for sister_data in sisters_data:
+            Sister.objects.create(family_details=instance, **sister_data)
+        return instance
+

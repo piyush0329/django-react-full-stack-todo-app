@@ -91,7 +91,7 @@ class Sister(models.Model):
         return self.name
 
 class FamilyDetails(models.Model):
-    total_members = models.IntegerField(null=True, default=None)
+    total_members = models.CharField(max_length=10,null=True, default=None)
     father_name = models.CharField(max_length=100, null=True,default=None)
     mother_name = models.CharField(max_length=100,null=True,default=None)
     grandfather_name = models.CharField(max_length=100,null=True,default=None)

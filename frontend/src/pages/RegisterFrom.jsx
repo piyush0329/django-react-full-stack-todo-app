@@ -13,6 +13,8 @@ const RegisterForm = () => {
   const [mobile,setMobile] = useState("")
   const [address,setAddress] = useState("")
   const [pincode,setPincode] = useState("")
+  const [pancard,setPancard] = useState("")
+  const [aadharcard,setAadharcard] = useState("")
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -20,7 +22,18 @@ const RegisterForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await api.post('/api/user/register/', { username, email, password, first_name:firstName, last_name:lastName ,mobile ,address ,pin_code:pincode });
+      const res = await api.post('/api/user/register/', { 
+        username, 
+        email, 
+        password, 
+        first_name:firstName, 
+        last_name:lastName, 
+        mobile, 
+        address, 
+        pin_code:pincode,
+        pan_card:pancard,
+        aadhar_card:aadharcard
+      });
       if(res.status==201){
         navigate("/login");
       }else{
@@ -84,6 +97,20 @@ const RegisterForm = () => {
         value={pincode}
         onChange={(e) => setPincode(e.target.value)}
         placeholder="pin code"
+      />
+      <input
+        className="form-input"
+        type="text"
+        value={pancard}
+        onChange={(e) => setPancard(e.target.value)}
+        placeholder="Pan Card"
+      />
+      <input
+        className="form-input"
+        type="text"
+        value={aadharcard}
+        onChange={(e) => setAadharcard(e.target.value)}
+        placeholder="Aadhar Card"
       />
       <input
         className="form-input"

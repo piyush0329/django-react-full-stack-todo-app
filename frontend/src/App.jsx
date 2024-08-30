@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import LoginForm from "./pages/LoginForm";
 import RegisterForm from "./pages/RegisterFrom";
+import AddFamilyDetailsPage from "./pages/AddFamilyDetailsPage";
+import UpdateFamilyDetailsPage from "./pages/UpdateFamilyDetailsPage";
 
 function Logout() {
   localStorage.clear();
@@ -24,6 +26,18 @@ function App() {
         element={
           <ProtectedRoute>
             <Home/>
+          </ProtectedRoute>
+        } />
+        <Route path="/add-family-details" 
+        element={
+          <ProtectedRoute>
+            <AddFamilyDetailsPage/>
+          </ProtectedRoute>
+        } />
+        <Route path="/update-family-details" 
+        element={
+          <ProtectedRoute>
+            <UpdateFamilyDetailsPage/>
           </ProtectedRoute>
         } />
         <Route path="/login" element={<LoginForm/>} />
