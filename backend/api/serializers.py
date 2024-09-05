@@ -18,6 +18,7 @@ from .models import Note,User,FamilyDetails,Brother,Sister
 #         return user 
 
 class UserSerializer(serializers.ModelSerializer):
+    
    
     first_name = serializers.CharField( required=False, allow_blank=True)
     last_name = serializers.CharField( required=False, allow_blank=True)
@@ -41,7 +42,8 @@ class UserSerializer(serializers.ModelSerializer):
             "pin_code",
             "password",
             "pan_card",
-            "aadhar_card"
+            "aadhar_card",
+            "profile_pic"
         ]
         extra_kwargs = {
             "password": {"write_only": True},  # Ensure password is write-only

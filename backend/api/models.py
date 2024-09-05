@@ -42,6 +42,8 @@ class CustomUserManager(BaseUserManager):
     
 # User Model class
 class User(AbstractBaseUser, PermissionsMixin):
+    def nameFile(instance,filename):
+        return '/'.join(['images',str(instance.name),filename])
     username = models.CharField(db_index=True, unique=True,max_length=150)
     email = models.EmailField(max_length=254,null=True)
     first_name = models.CharField(max_length=240, default=None,null=True )
@@ -51,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     pin_code = models.CharField(max_length=6, default=None,null=True)
     pan_card = models.CharField(max_length=10,default=None,null=True)
     aadhar_card= models.CharField(max_length= 12,default=None,null=True)
+    profile_pic = models.ImageField(upload_to="nameFile",blank=True)
 
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)

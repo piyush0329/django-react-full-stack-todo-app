@@ -32,15 +32,18 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('email', 'first_name', 'last_name', 'mobile', 'address', 'pin_code','pan_card','aadhar_card')}),
+        ('Personal info', {'fields': ('email', 'first_name', 'last_name', 'mobile', 'address', 'pin_code','pan_card','aadhar_card','profile_pic')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2'),
+            'fields': ('username', 'email', 'password1', 'password2','first_name','last_name','mobile','address','pin_code','pan_card','aadhar_card','profile_pic'),
+            
         }),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login',)}),
     )
 
 class FamilyDetailsAdmin(admin.ModelAdmin):
